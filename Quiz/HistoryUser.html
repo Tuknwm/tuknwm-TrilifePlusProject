@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histori Pembelian - TriLifePlus</title>
+    <link rel="stylesheet" href="LandingPage2.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="Me.png">
+    <style>
+        .history-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .filter-section {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-select {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .history-table th {
+            background: white;
+            color: black;
+            border: 1px solid black;
+            padding: 1rem;
+            text-align: left;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .history-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-table tbody tr:hover {
+            background: #f8f9fa;
+            transition: background 0.3s ease;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-lunas { background: #28a745; color: white; }
+        .status-pending { background: #ffc107; color: #333; }
+        .status-expired { background: #dc3545; color: white; }
+
+        .amount {
+            font-weight: bold;
+            color: #28a745;
+            font-size: 1.1rem;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .no-data i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="LandingPage.html">
+            <img class="Logo" src="Img/Logo2.png" alt="Logo">
+        </a>
+        <nav class="navbar">
+            <a href="LandingPage.html" class="Nav">Beranda</a>
+            <a href="AsuransiMobil.html" class="Nav">Asuransi Mobil</a>
+            <a href="AsuransiKesehatan.html" class="Nav">Asuransi Kesehatan</a>
+            <a href="Asuransijiwa.html" class="Nav">Asuransi Jiwa</a>
+            <a href="CheckOut.html" class="Nav">Checkout</a>
+            <a href="LoginPage.html" class="Nav login-link">Login</a>
+        </nav>
+    </header>
+
+    <div class="BgTrilife"></div>
+
+    <section class="ContainerHome" style="margin-top: 5rem; min-height: 80vh;">
+        <div class="history-container">
+            <div class="stats-section" id="statsSection"></div>
+            <div id="historyContent"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="containerFooter">
+            <div class="FooterBox">
+                <div class="FootB">
+                    <img class="FLogo" src="Img/Logo2.png" alt="Logo Asuransi">
+                    <p style="color: white; margin-bottom: 12px; max-width: 300px; line-height: 1.5; font-size: 16px;"><strong>PT Protego Arunika Trilife</strong></p>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 12px; max-width: 300px; line-height: 1.5; font-size: 14px;">Jl. Gatot Subroto Kav. 35-37, Menara Asuransi Lantai 12, RT.8/RW.3, Kuningan Barat, Kecamatan Mampang Prapatan, Kota Jakarta Selatan, DKI Jakarta 12710.</p>
+                    <p style="color: white; margin-bottom: 12px; max-width: 300px; line-height: 1.5; font-size: 16px;"><strong>Ikuti Kami:</strong></p>
+                    <div style="display: flex; gap: 12px; margin-top: 15px;">
+                        <a href="#" class="IconLink">
+                            <img src="Img/youtube.png" alt="YouTube" style="width: 20px; height: 20px;">
+                        </a>
+                        <a href="#" class="IconLink">
+                            <img src="Img/instagram.png" alt="Instagram" style="width: 20px; height: 20px;">
+                        </a>
+                        <a href="#" class="IconLink">
+                            <img src="Img/twitter2.png" alt="Twitter" style="width: 20px; height: 20px;">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="FootB" style="text-align:center;">
+                    <h4>Berizin dan Diawasi oleh</h4>
+                    <img src="Img/ojkv2.png" alt="OJK" class="legal-img" style="max-width:200px; margin-top:1rem;">
+                    
+                    <h4 style="margin-top: 2rem;">Didukung oleh</h4>
+                    <div class="support-logos" style="display:flex; gap:15px; justify-content:center; align-items:center; flex-wrap:wrap; margin-top:0.5rem;">
+                        <img src="Img/bank1.png" alt="Bank 1" class="support-img" style="max-width:80px;">
+                    </div>
+                </div>
+
+                <div class="InfoCs">
+                    <h4>Customer Service</h4>
+                    <div class="CustomerService">
+                        <div style="display: flex; gap: 40px; border-bottom: 2px solid rgba(255,255,255,0.2);">
+                            <div>
+                                <p>Email:</p>
+                                <p><strong>cs@insurex.id</strong></p>
+                            </div>
+                            <div>
+                                <p>Telepon:</p> 
+                                <p style="margin-bottom: 1rem;"><strong>(021) 1234567</strong></p>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem;"><strong>Waktu Operasional</strong></p>
+                        <div style="display: flex; gap: 20px;">
+                            <div style="border-left: 2px solid rgba(255,255,255,0.2); padding-left: 1rem;">
+                                <p>Senin - Jumat:</p>
+                                <p><strong> 07.00 - 18.00</strong></p>
+                            </div>
+                            <div style="border-left: 2px solid rgba(255,255,255,0.2); border-right: 2px solid rgba(255,255,255,0.2); padding-left: 1rem; padding-right: 1rem;">
+                                <p>Sabtu / Minggu & Hari Libur Nasional:</p> 
+                                <p><strong>Libur</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; margin-top: 1rem; gap: 10px;">
+                        <div class="BoxMs" style="width: 100%; display: flex; justify-content: center;">
+                            <img src="Img/file-contract-solid-full.png" 
+                                alt="Syarat & Ketentuan" 
+                                style="width:16px; height:16px; vertical-align:middle; margin-right:6px; object-fit:contain;">
+                            <div class="BoxText">
+                                <p style="color: white;"><strong>Syarat & Ketentuan</strong></p>
+                            </div>
+                        </div>
+                        <div class="BoxMs" style="width: 100%; display: flex; justify-content: center;">
+                            <img src="Img/user-shield-solid-full.png" alt="Syarat & Ketentuan" style="width:16px; height:16px; vertical-align:middle; margin-right:6px; object-fit:contain;">
+                            <div class="BoxText">
+                                <p style="color: white;"><strong>Kebijakan Privasi</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="End">
+                <p style="font-size: 14px;">&copy; 2025 TriLifePlus | All Rights Reserved.</p>
+            </div>
+        </div>
+
+        <a href="https://wa.me/6285218826006?text=Halo,%20saya%20ingin%20bertanya%20tentang%20produk%20asuransi."
+            target="_blank" class="ChatWA">
+            <img src="Img/whatsapp.png" alt="WhatsApp" style="width: 36px; height: 36px;">
+        </a>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let allTransactions = [];
+        let filteredTransactions = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTransactionHistory();
+        });
+
+        function loadTransactionHistory() {
+            const transactions = [];
+            const paymentHistory = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
+            
+            paymentHistory.forEach(payment => {
+                let dateValue = null;
+                
+                if (payment.timestamp) {
+                    dateValue = payment.timestamp;
+                } else if (payment.date) {
+                    dateValue = payment.date;
+                } else {
+                    dateValue = new Date().toISOString();
+                }
+
+                transactions.push({
+                    id: payment.id || generateTransactionId(),
+                    productName: payment.productName || getProductName(payment.insuranceType || payment.type),
+                    type: payment.insuranceType || payment.type,
+                    date: dateValue,
+                    amount: payment.amount,
+                    method: payment.method || 'Transfer',
+                    status: payment.status || 'lunas',
+                    details: payment.details || getTransactionDetails(payment.insuranceType || payment.type),
+                    jenis: payment.jenis || null,
+                    jenisJiwa: payment.jenisJiwa || null,
+                    merk: payment.merk || null
+                });
+            });
+
+            allTransactions = transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+            filteredTransactions = [...allTransactions];
+            
+            renderStats();
+            renderTransactions();
+        }
+
+        function generateTransactionId() {
+            return 'TRX' + Date.now().toString().substr(-6);
+        }
+
+        function getProductName(type) {
+            const names = {
+                'kesehatan': 'Asuransi Kesehatan',
+                'mobil': 'Asuransi Mobil',
+                'jiwa': 'Asuransi Jiwa'
+            };
+            return names[type] || 'Asuransi';
+        }
+
+        function getTransactionDetails(type, additionalInfo = '') {
+            const details = {
+                'kesehatan': `Premi tahunan asuransi kesehatan${additionalInfo ? ' - ' + additionalInfo : ''}`,
+                'mobil': `Premi asuransi kendaraan${additionalInfo ? ' - ' + additionalInfo : ''}`,
+                'jiwa': `Premi asuransi jiwa${additionalInfo ? ' - ' + additionalInfo : ''}`
+            };
+            return details[type] || 'Pembayaran premi asuransi';
+        }
+
+        function renderStats() {
+            const statsSection = document.getElementById('statsSection');
+        }
+
+        function calculateStats() {
+        }
+
+        function renderTransactions() {
+            const content = document.getElementById('historyContent');
+            
+            if (filteredTransactions.length === 0) {
+                content.innerHTML = `
+                    <div class="no-data">
+                        <i class='bx bx-receipt'></i>
+                        <h3>Belum Ada Transaksi</h3>
+                        <p>Anda belum memiliki histori pembelian asuransi</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const tableHTML = `
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Nama Produk</th>
+                            <th>Jenis</th>
+                            <th>Tanggal Pembelian</th>
+                            <th>Metode Pembayaran</th>
+                            <th>Jumlah</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${filteredTransactions.map(transaction => {
+                            let jenis = '-';
+                            if (transaction.type === 'jiwa') {
+                                jenis = transaction.jenisJiwa || '-';
+                            } else if (transaction.type === 'kesehatan') {
+                                jenis = transaction.jenis || '-';
+                            } else if (transaction.type === 'mobil') {
+                                jenis = `${transaction.merk || ''} ${transaction.jenis || ''}`.trim() || '-';
+                            }
+
+                            return `
+                                <tr>
+                                    <td><strong>${getProductName(transaction.type)}</strong></td>
+                                    <td>${jenis}</td>
+                                    <td>${formatDate(transaction.date)}</td>
+                                    <td>${transaction.method || '-'}</td>
+                                    <td class="amount">Rp ${formatCurrency(transaction.amount)}</td>
+                                    <td>
+                                        <span class="status-badge status-${transaction.status}">
+                                            ${transaction.status}
+                                        </span>
+                                    </td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            `;
+
+            content.innerHTML = tableHTML;
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID').format(amount);
+        }
+
+        function formatDate(dateString) {
+            try {
+                if (typeof dateString === 'string' && dateString.includes('/') && dateString.includes('.')) {
+                    return dateString;
+                }
+                return "-";
+            } catch (error) {
+                return "-";
+            }
+        }
+
+        function showTransactionDetail(transactionId) {
+            const transaction = allTransactions.find(t => t.id === transactionId);
+            if (!transaction) return;
+                alert(`Detail Transaksi ${transaction.id}:
+                Produk: ${transaction.productName}
+                Tanggal: ${formatDate(transaction.date)}
+                Jumlah: Rp ${formatCurrency(transaction.amount)}
+                Metode: ${transaction.method}
+                Status: ${transaction.status.toUpperCase()}
+                Detail: ${transaction.details}`
+            );
+        }
+
+        function addTransaction(transactionData) {
+            const paymentHistory = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
+            paymentHistory.push(transactionData);
+            localStorage.setItem('paymentHistory', JSON.stringify(paymentHistory));
+        }
+
+        window.addTransaction = addTransaction;
+    </script>
+</body>
+</html>
