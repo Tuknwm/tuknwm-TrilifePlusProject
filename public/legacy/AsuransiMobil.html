@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TriLifePlus</title>
+    <link rel="stylesheet" href="LandingPage2.css">
+    <link rel="icon" type="image/png" href="Img/Logo6.png"/>
+</head>
+<body>
+    <header class="header">
+        <a href="/dashboard">
+            <img class="Logo" src="Img/Logo2.png" alt="Logo">
+        </a>
+        <nav class="navbar">
+            <a href="/dashboard" class="Nav">Beranda</a>
+            <a href="AsuransiKesehatan.html" class="Nav">Asuransi Kesehatan</a>
+            <a href="AsuransiJiwa.html" class="Nav">Asuransi Jiwa</a>
+            <a href="HistoryUser.html" class="Nav">History</a>
+            <a href="/" class="Nav login-link">Login</a>
+        </nav>
+    </header>
+
+    <div class="BgTrilife"></div>
+
+    <section class="ContainerHome" style="margin-top: 5rem;">
+        <div class="AmBox">
+            <div class="HeaderAsuransiMobil">
+                <img src="Img/AsuransiMobil.png" alt="Asuransi Mobil">
+            </div>
+            <form style="width: auto;" id="mobilForm">
+                <div class="InputForm">
+                    <label for="merk">Merk Mobil: </label>
+                    <select id="merk" name="merk" required>
+                        <option value="" disabled selected>Pilih Merk</option>
+                        <option value="Toyota">Toyota</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Mitsubishi">Mitsubishi</option>
+                        <option value="Suzuki">Suzuki</option>
+                        <option value="Daihatsu">Daihatsu</option>
+                        <option value="Nissan">Nissan</option>
+                        <option value="Mazda">Mazda</option>
+                        <option value="Kia">Kia</option>
+                        <option value="Hyundai">Hyundai</option>
+                        <option value="Ford">Ford</option>
+                        <option value="Chevrolet">Chevrolet</option>
+                        <option value="Mercedes">Mercedes</option>
+                        <option value="BMW">BMW</option>
+                        <option value="Audi">Audi</option>
+                        <option value="Volkswagen">Volkswagen</option>
+                        <option value="Lexus">Lexus</option>
+                        <option value="Jeep">Jeep</option>
+                        <option value="Land Rover">Land Rover</option>
+                        <option value="Porsche">Porsche</option>
+                        <option value="Tesla">Tesla</option>
+                    </select>
+                </div>
+
+                <div class="InputForm">
+                    <label for="jenis">Jenis Mobil: </label>
+                    <select id="jenis" name="jenis" required disabled>
+                        <option value="">Pilih Jenis</option>
+                    </select>
+                </div>
+
+                <div class="InputForm">
+                    <label for="tahun">Tahun Pembuatan: </label>
+                    <input type="number" id="tahun" placeholder="Masukan Tahun Pembuatan" name="tahun" min="1900" max="2099" required>
+                </div>
+
+                <div class="InputForm">
+                    <label for="harga">Harga Mobil: </label>
+                    <input type="number" id="harga" placeholder="Masukan Harga Mobil" name="harga" min="0" required>
+                </div>
+
+                <div class="InputForm">
+                    <label for="plat">Nomor Plat: </label>
+                    <input type="text" id="plat" placeholder="Masukan Nomor Plat" name="plat" required>
+                </div>
+
+                <div class="InputForm">
+                    <label for="mesin">Nomor Mesin: </label>
+                    <input type="text" id="mesin" placeholder="Masukan Nomor Mesin" name="mesin" required>
+                </div>
+
+                <div class="InputForm">
+                    <label for="rangka">Nomor Rangka: </label>
+                    <input type="text" id="rangka" placeholder="Masukan Nomor Rangka" name="rangka" required>
+                </div>
+
+                <div class="InputForm">
+                    <label for="pemilik">Nama Pemilik: </label>
+                    <input type="text" id="pemilik" placeholder="Masukan Nama Pemilik" name="pemilik" required>
+                </div>
+
+                <div class="InputForm">
+                    <label for="foto_depan">Foto Tampak Depan: </label>
+                    <input type="file" id="foto_depan" name="foto_depan" accept="image/*" required>
+                </div>
+
+                <div class="InputForm">
+                    <label for="foto_belakang">Foto Tampak Belakang: </label>
+                    <input type="file" id="foto_belakang" name="foto_belakang" accept="image/*" required>
+                </div>
+
+                <div class="InputForm">
+                    <label for="foto_kiri">Foto Tampak Kiri: </label>
+                    <input type="file" id="foto_kiri" name="foto_kiri" accept="image/*" required>
+                </div>
+
+                <div class="InputForm">
+                    <label for="foto_kanan">Foto Tampak Kanan: </label>
+                    <input type="file" id="foto_kanan" name="foto_kanan" accept="image/*" required>
+                </div>
+
+                <div class="InputForm">
+                    <label for="foto_dashboard">Foto Dashboard: </label>
+                    <input type="file" id="foto_dashboard" name="foto_dashboard" accept="image/*" required>
+                </div>
+
+                <div class="InputForm">
+                    <label for="foto_mesin">Foto Mesin: </label>
+                    <input type="file" id="foto_mesin" name="foto_mesin" accept="image/*" required>
+                </div>
+
+                <div class="InputForm" style="grid-column: span 2;">
+                    <button type="submit">Periksa</button>
+                </div>
+            </form>
+
+        </div>
+    </section>
+
+    <div id="overlay"></div>
+    <div id="hasilPremi" class="HasilPremi">
+        <div id="loadingState" class="LoadingState">
+            <div class="Spinner"></div>
+            <p class="LoadingLabel">Menghitung premi...</p>
+        </div>
+        <div id="resultState" class="ResultState">
+            <div class="HasilBanner">
+                <h3>Hasil Perhitungan Premi</h3>
+                <p>Asuransi Mobil</p>
+            </div>
+            <div class="HasilBody">
+                <div id="detailGrid" class="DetailGrid"></div>
+                <div class="PremiCard">
+                    <span>Estimasi Total Premi</span>
+                    <p id="premiText"></p>
+                </div>
+                <button id="checkoutBtn">Lanjut ke Checkout →</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="containerFooter">
+            <div class="FooterBox">
+                <div class="FootB">
+                    <img class="FLogo" src="Img/Logo2.png" alt="Logo Asuransi">
+                    <p style="color: white; margin-bottom: 12px; max-width: 300px; line-height: 1.5; font-size: 16px;"><strong>PT Protego Arunika Trilife</strong></p>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 12px; max-width: 300px; line-height: 1.5; font-size: 14px;">Jl. Gatot Subroto Kav. 35-37, Menara Asuransi Lantai 12, RT.8/RW.3, Kuningan Barat, Kecamatan Mampang Prapatan, Kota Jakarta Selatan, DKI Jakarta 12710.</p>
+                    <p style="color: white; margin-bottom: 12px; max-width: 300px; line-height: 1.5; font-size: 16px;"><strong>Ikuti Kami:</strong></p>
+                    <div style="display: flex; gap: 12px; margin-top: 15px;">
+                        <a href="#" class="IconLink">
+                            <img src="Img/youtube.png" alt="YouTube" style="width: 20px; height: 20px;">
+                        </a>
+                        <a href="#" class="IconLink">
+                            <img src="Img/instagram.png" alt="Instagram" style="width: 20px; height: 20px;">
+                        </a>
+                        <a href="#" class="IconLink">
+                            <img src="Img/twitter2.png" alt="Twitter" style="width: 20px; height: 20px;">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="FootB" style="text-align:center;">
+                    <h4>Berizin dan Diawasi oleh</h4>
+                    <img src="Img/ojkv2.png" alt="OJK" class="legal-img" style="max-width:200px; margin-top:1rem;">
+                </div>
+
+                <div class="InfoCs">
+                    <h4>Customer Service</h4>
+                    <div class="CustomerService">
+                        <div style="display: flex; gap: 40px; border-bottom: 2px solid rgba(255,255,255,0.2);">
+                            <div>
+                                <p>Email:</p>
+                                <p><strong>cs@insurex.id</strong></p>
+                            </div>
+                            <div>
+                                <p>Telepon:</p> 
+                                <p style="margin-bottom: 1rem;"><strong>(021) 1234567</strong></p>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem;"><strong>Waktu Operasional</strong></p>
+                        <div style="display: flex; gap: 20px;">
+                            <div style="border-left: 2px solid rgba(255,255,255,0.2); padding-left: 1rem;">
+                                <p>Senin - Jumat:</p>
+                                <p><strong> 07.00 - 18.00</strong></p>
+                            </div>
+                            <div style="border-left: 2px solid rgba(255,255,255,0.2); border-right: 2px solid rgba(255,255,255,0.2); padding-left: 1rem; padding-right: 1rem;">
+                                <p>Sabtu / Minggu & Hari Libur Nasional:</p> 
+                                <p><strong>Libur</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; margin-top: 1rem; gap: 10px;">
+                        <div class="BoxMs" style="width: 100%; display: flex; justify-content: center;">
+                            <img src="Img/file-contract-solid-full.png" 
+                                alt="Syarat & Ketentuan" 
+                                style="width:16px; height:16px; vertical-align:middle; margin-right:6px; object-fit:contain;">
+                            <div class="BoxText">
+                                <p style="color: white;"><strong>Syarat & Ketentuan</strong></p>
+                            </div>
+                        </div>
+                        <div class="BoxMs" style="width: 100%; display: flex; justify-content: center;">
+                            <img src="Img/user-shield-solid-full.png" alt="Syarat & Ketentuan" style="width:16px; height:16px; vertical-align:middle; margin-right:6px; object-fit:contain;">
+                            <div class="BoxText">
+                                <p style="color: white;"><strong>Kebijakan Privasi</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="End">
+                <p style="font-size: 14px;">&copy; 2025 TriLifePlus | All Rights Reserved.</p>
+            </div>
+        </div>
+
+        <div class="ChatWA">
+            <img src="Img/whatsapp.png" alt="WhatsApp" style="width: 36px; height: 36px;">
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById("mobilForm");
+            const hasilDiv = document.getElementById("hasilPremi");
+            const loadingState = document.getElementById("loadingState");
+            const resultState = document.getElementById("resultState");
+            const detailGrid = document.getElementById("detailGrid");
+            const premiText = document.getElementById("premiText");
+            const checkoutBtn = document.getElementById("checkoutBtn");
+            const overlay = document.getElementById("overlay");
+
+            function closePopup() {
+                hasilDiv.classList.remove("show");
+                overlay.classList.remove("active");
+                setTimeout(() => {
+                    hasilDiv.style.display = "none";
+                    loadingState.style.cssText = "";
+                    resultState.style.cssText = "";
+                }, 350);
+            }
+
+            overlay.addEventListener("click", closePopup);
+            hasilDiv.addEventListener("click", e => e.stopPropagation());
+
+            const jenisMobil = {
+                Toyota: ["Avanza", "Vios", "Yaris", "Fortuner", "Corolla"],
+                Honda: ["Brio", "Jazz", "Civic", "CR-V", "HR-V"],
+                Mitsubishi: ["Pajero", "Xpander", "Lancer", "Eclipse Cross", "Outlander"],
+                Suzuki: ["Ertiga", "Swift", "Ignis", "Baleno", "APV"],
+                Daihatsu: ["Xenia", "Terios", "Ayla", "Sirion", "Gran Max"],
+                Nissan: ["March", "X-Trail", "GT-R", "Navara", "Almera"],
+                Mazda: ["Mazda2", "Mazda3", "CX-3", "CX-5", "CX-9"],
+                Kia: ["Picanto", "Rio", "Seltos", "Sportage", "Carnival"],
+                Hyundai: ["i10", "i20", "Tucson", "Santa Fe", "Palisade"],
+                Ford: ["Fiesta", "Focus", "Ranger", "Everest", "Mustang"],
+                Chevrolet: ["Spark", "Aveo", "Trailblazer", "Captiva", "Colorado"],
+                Mercedes: ["A-Class", "C-Class", "E-Class", "GLA", "GLE"],
+                BMW: ["Series 1", "Series 3", "Series 5", "X1", "X5"],
+                Audi: ["A3", "A4", "A6", "Q3", "Q5"],
+                Volkswagen: ["Polo", "Golf", "Passat", "Tiguan", "Touareg"],
+                Lexus: ["IS", "ES", "RX", "NX", "UX"],
+                Jeep: ["Wrangler", "Cherokee", "Compass", "Renegade", "Grand Cherokee"],
+                "Land Rover": ["Range Rover", "Discovery", "Defender", "Velar", "Evoque"],
+                Porsche: ["Cayenne", "Macan", "911", "Panamera", "Taycan"],
+                Tesla: ["Model S", "Model 3", "Model X", "Model Y", "Roadster"]
+            };
+
+            const merkSelect = document.getElementById("merk");
+            const jenisSelect = document.getElementById("jenis");
+
+            merkSelect.addEventListener("change", function() {
+                const merk = this.value;
+                jenisSelect.innerHTML = '<option value="" disabled selected>Pilih Jenis</option>';
+                if (merk && jenisMobil[merk]) {
+                    jenisMobil[merk].forEach(j => {
+                        const option = document.createElement("option");
+                        option.value = j;
+                        option.textContent = j;
+                        jenisSelect.appendChild(option);
+                    });
+                    jenisSelect.disabled = false;
+                } else {
+                    jenisSelect.disabled = true;
+                }
+            });
+
+            form.addEventListener("submit", function(e) {
+                e.preventDefault();
+
+                const merk = document.getElementById("merk").value;
+                const jenis = document.getElementById("jenis").value;
+                const tahun = parseInt(document.getElementById("tahun").value);
+                const harga = parseFloat(document.getElementById("harga").value);
+                const plat = document.getElementById("plat").value;
+                const mesin = document.getElementById("mesin").value;
+                const rangka = document.getElementById("rangka").value;
+                const pemilik = document.getElementById("pemilik").value;
+                const umurMobil = new Date().getFullYear() - tahun;
+
+                let premi = 0;
+                let kategori = "";
+
+                if (umurMobil >= 0 && umurMobil <= 3) {
+                    premi = 0.025 * harga * umurMobil;
+                    kategori = "0–3 tahun (2.5% per tahun)";
+                } else if (umurMobil <= 5) {
+                    if (harga < 200000000) {
+                        premi = 0.04 * harga * umurMobil;
+                        kategori = "3–5 tahun & harga < 200 juta (4% per tahun)";
+                    } else {
+                        premi = 0.03 * harga * umurMobil;
+                        kategori = "3–5 tahun & harga ≥ 200 juta (3% per tahun)";
+                    }
+                } else {
+                    premi = 0.05 * harga * umurMobil;
+                    kategori = ">5 tahun (5% per tahun)";
+                }
+
+                loadingState.style.display = "flex";
+                loadingState.style.opacity = "1";
+                resultState.style.display = "none";
+                overlay.classList.add("active");
+                hasilDiv.style.display = "block";
+                requestAnimationFrame(() => hasilDiv.classList.add("show"));
+
+                setTimeout(() => {
+                    const details = [
+                        { label: "Merk", value: merk },
+                        { label: "Jenis", value: jenis },
+                        { label: "Pemilik", value: pemilik },
+                        { label: "Nomor Plat", value: plat },
+                        { label: "Tahun Pembuatan", value: tahun },
+                        { label: "Umur Mobil", value: `${umurMobil} tahun` },
+                        { label: "Harga Mobil", value: `Rp ${harga.toLocaleString()}` },
+                        { label: "Kategori Premi", value: kategori },
+                    ];
+
+                    detailGrid.innerHTML = "";
+                    details.forEach((d, i) => {
+                        const item = document.createElement("div");
+                        item.className = "DetailItem";
+                        item.style.cssText = `opacity:0; transform:translateY(8px); transition: opacity 0.3s ease ${i * 0.055}s, transform 0.3s ease ${i * 0.055}s`;
+                        item.innerHTML = `<span class="DetailLabel">${d.label}</span><span class="DetailValue">${d.value}</span>`;
+                        detailGrid.appendChild(item);
+                    });
+
+                    premiText.textContent = `Rp ${premi.toLocaleString("id-ID")}`;
+
+                    const dataMobil = {
+                        type: 'mobil', merk, jenis, pemilik, plat, mesin, rangka,
+                        harga, tahun, umur: umurMobil, premi, kategori,
+                        timestamp: new Date().toISOString()
+                    };
+                    sessionStorage.setItem("mobilData", JSON.stringify(dataMobil));
+                    localStorage.setItem("mobilData", JSON.stringify(dataMobil));
+
+                    loadingState.style.transition = "opacity 0.25s ease";
+                    loadingState.style.opacity = "0";
+
+                    setTimeout(() => {
+                        loadingState.style.display = "none";
+                        resultState.style.display = "block";
+                        resultState.style.opacity = "0";
+                        resultState.style.transform = "translateY(12px)";
+                        resultState.style.transition = "opacity 0.35s ease, transform 0.35s ease";
+
+                        requestAnimationFrame(() => requestAnimationFrame(() => {
+                            resultState.style.opacity = "1";
+                            resultState.style.transform = "translateY(0)";
+                            detailGrid.querySelectorAll(".DetailItem").forEach(item => {
+                                item.style.opacity = "1";
+                                item.style.transform = "translateY(0)";
+                            });
+                        }));
+                    }, 260);
+                }, 1500);
+            });
+
+            checkoutBtn.addEventListener("click", () => {
+                window.location.href = "CheckOut.html?type=mobil";
+            });
+        });
+    </script>
+</body>
+</html>
+

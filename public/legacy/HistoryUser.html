@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histori Pembelian - TriLifePlus</title>
+    <link rel="stylesheet" href="LandingPage2.css">
+    <link rel="icon" type="image/png" href="Me.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&display=swap');
+
+        body, button, input {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .history-page {
+            max-width: 1100px;
+            margin: 7rem auto 5rem;
+            padding: 0 1.5rem;
+        }
+
+        .history-hero {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .history-hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            margin: 0 0 0.25rem;
+        }
+
+        .history-hero p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Controls */
+        .controls-bar {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-wrap {
+            position: relative;
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background: rgba(255,255,255,0.09);
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 12px;
+            color: white;
+            font-size: 0.88rem;
+            font-family: inherit;
+            outline: none;
+            backdrop-filter: blur(8px);
+            box-sizing: border-box;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .search-input::placeholder { color: rgba(255,255,255,0.4); }
+
+        .search-input:focus {
+            border-color: rgba(255,255,255,0.55);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            padding: 0.55rem 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.22);
+            background: rgba(255,255,255,0.07);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .filter-chip:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+
+        .filter-chip.active {
+            background: white;
+            color: #1E3A8A;
+            border-color: white;
+        }
+
+        .controls-divider {
+            width: 1px;
+            height: 36px;
+            background: rgba(255,255,255,0.18);
+            flex-shrink: 0;
+        }
+
+        .results-info {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 0.75rem;
+        }
+
+        /* Transaction Cards */
+        .trx-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .trx-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 1.1rem 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 1.15rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .trx-info { flex: 1; min-width: 0; }
+
+        .trx-info__name {
+            font-size: 0.93rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .trx-info__meta {
+            font-size: 0.76rem;
+            color: #64748b;
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 1rem;
+            row-gap: 0.1rem;
+        }
+
+        .trx-info__meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.22rem;
+        }
+
+        .trx-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.4rem;
+            flex-shrink: 0;
+        }
+
+        .trx-amount {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #16a34a;
+        }
+
+        .status-badge {
+            padding: 0.22rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+
+        .status-lunas   { background: #dcfce7; color: #16a34a; border: 1px solid #bbf7d0; }
+        .status-pending { background: #fef9c3; color: #a16207; border: 1px solid #fde68a; }
+        .status-expired { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
+
+        /* Empty state */
+        .no-data {
+            background: white;
+            border-radius: 16px;
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #94a3b8;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .no-data h3 { font-size: 1.05rem; color: #475569; margin: 0 0 0.35rem; }
+        .no-data p  { font-size: 0.84rem; margin: 0; }
+
+
+        @media (max-width: 768px) {
+            .history-hero h1 { font-size: 1.5rem; }
+            .trx-card { flex-wrap: wrap; }
+            .trx-right { flex-direction: row; align-items: center; width: 100%; justify-content: space-between; }
+            .controls-divider { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .history-page { padding: 0 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/dashboard">
+            <img class="Logo" src="Img/Logo2.png" alt="Logo">
+        </a>
+        <nav class="navbar">
+            <a href="/dashboard" class="Nav">Beranda</a>
+            <a href="AsuransiMobil.html" class="Nav">Asuransi Mobil</a>
+            <a href="AsuransiKesehatan.html" class="Nav">Asuransi Kesehatan</a>
+            <a href="AsuransiJiwa.html" class="Nav">Asuransi Jiwa</a>
+            <a href="HistoryUser.html" class="Nav">History</a>
+            <a href="/" class="Nav login-link">Login</a>
+        </nav>
+    </header>
+
+    <div class="BgTrilife"></div>
+
+    <div class="history-page">
+        <div class="history-hero">
+            <h1>Histori Transaksi</h1>
+            <p>Riwayat lengkap pembelian asuransi Anda</p>
+        </div>
+
+        <div class="controls-bar">
+            <div class="search-wrap">
+                <input class="search-input" id="searchInput" type="text" placeholder="Cari transaksi, produk, metode...">
+            </div>
+
+            <div class="filter-group" id="typeFilter">
+                <button class="filter-chip active" data-value="all">Semua</button>
+                <button class="filter-chip" data-value="kesehatan">Kesehatan</button>
+                <button class="filter-chip" data-value="jiwa">Jiwa</button>
+                <button class="filter-chip" data-value="mobil">Mobil</button>
+            </div>
+
+            <div class="controls-divider"></div>
+
+            <div class="filter-group" id="statusFilter">
+                <button class="filter-chip active" data-value="all">Semua Status</button>
+                <button class="filter-chip" data-value="lunas">Lunas</button>
+                <button class="filter-chip" data-value="pending">Pending</button>
+                <button class="filter-chip" data-value="expired">Expired</button>
+            </div>
+        </div>
+
+        <div class="trx-list" id="historyContent"></div>
+    </div>
+
+    <footer>
+        <div class="containerFooter">
+            <div class="FooterBox">
+                <div class="FootB">
+                    <img class="FLogo" src="Img/Logo2.png" alt="Logo Asuransi">
+                    <p style="color: white; margin-bottom: 12px; max-width: 300px; line-height: 1.5; font-size: 16px;"><strong>PT Protego Arunika Trilife</strong></p>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 12px; max-width: 300px; line-height: 1.5; font-size: 14px;">Jl. Gatot Subroto Kav. 35-37, Menara Asuransi Lantai 12, RT.8/RW.3, Kuningan Barat, Kecamatan Mampang Prapatan, Kota Jakarta Selatan, DKI Jakarta 12710.</p>
+                    <p style="color: white; margin-bottom: 12px; max-width: 300px; line-height: 1.5; font-size: 16px;"><strong>Ikuti Kami:</strong></p>
+                    <div style="display: flex; gap: 12px; margin-top: 15px;">
+                        <a href="#" class="IconLink"><img src="Img/youtube.png" alt="YouTube" style="width: 20px; height: 20px;"></a>
+                        <a href="#" class="IconLink"><img src="Img/instagram.png" alt="Instagram" style="width: 20px; height: 20px;"></a>
+                        <a href="#" class="IconLink"><img src="Img/twitter2.png" alt="Twitter" style="width: 20px; height: 20px;"></a>
+                    </div>
+                </div>
+
+                <div class="FootB" style="text-align:center;">
+                    <h4>Berizin dan Diawasi oleh</h4>
+                    <img src="Img/ojkv2.png" alt="OJK" class="legal-img" style="max-width:200px; margin-top:1rem;">
+                    <h4 style="margin-top: 2rem;">Didukung oleh</h4>
+                    <div style="display:flex; gap:15px; justify-content:center; align-items:center; flex-wrap:wrap; margin-top:0.5rem;">
+                        <img src="Img/bank1.png" alt="Bank 1" style="max-width:80px;">
+                    </div>
+                </div>
+
+                <div class="InfoCs">
+                    <h4>Customer Service</h4>
+                    <div class="CustomerService">
+                        <div style="display: flex; gap: 40px; border-bottom: 2px solid rgba(255,255,255,0.2);">
+                            <div>
+                                <p>Email:</p>
+                                <p><strong>cs@insurex.id</strong></p>
+                            </div>
+                            <div>
+                                <p>Telepon:</p>
+                                <p style="margin-bottom: 1rem;"><strong>(021) 1234567</strong></p>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem;"><strong>Waktu Operasional</strong></p>
+                        <div style="display: flex; gap: 20px;">
+                            <div style="border-left: 2px solid rgba(255,255,255,0.2); padding-left: 1rem;">
+                                <p>Senin - Jumat:</p>
+                                <p><strong>07.00 - 18.00</strong></p>
+                            </div>
+                            <div style="border-left: 2px solid rgba(255,255,255,0.2); border-right: 2px solid rgba(255,255,255,0.2); padding-left: 1rem; padding-right: 1rem;">
+                                <p>Sabtu / Minggu & Hari Libur Nasional:</p>
+                                <p><strong>Libur</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; margin-top: 1rem; gap: 10px;">
+                        <div class="BoxMs" style="width: 100%; display: flex; justify-content: center;">
+                            <img src="Img/file-contract-solid-full.png" alt="Syarat & Ketentuan" style="width:16px; height:16px; vertical-align:middle; margin-right:6px; object-fit:contain;">
+                            <div class="BoxText"><p style="color: white;"><strong>Syarat & Ketentuan</strong></p></div>
+                        </div>
+                        <div class="BoxMs" style="width: 100%; display: flex; justify-content: center;">
+                            <img src="Img/user-shield-solid-full.png" alt="Kebijakan Privasi" style="width:16px; height:16px; vertical-align:middle; margin-right:6px; object-fit:contain;">
+                            <div class="BoxText"><p style="color: white;"><strong>Kebijakan Privasi</strong></p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="End">
+                <p style="font-size: 14px;">&copy; 2025 TriLifePlus | All Rights Reserved.</p>
+            </div>
+        </div>
+
+        <div class="ChatWA">
+            <img src="Img/whatsapp.png" alt="WhatsApp" style="width: 36px; height: 36px;">
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let allTransactions = [];
+        let filteredTransactions = [];
+        let activeType = 'all';
+        let activeStatus = 'all';
+        let searchQuery = '';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTransactionHistory();
+            bindControls();
+        });
+
+        function bindControls() {
+            document.getElementById('searchInput').addEventListener('input', e => {
+                searchQuery = e.target.value.toLowerCase().trim();
+                applyFilters();
+            });
+
+            document.getElementById('typeFilter').addEventListener('click', e => {
+                const chip = e.target.closest('.filter-chip');
+                if (!chip) return;
+                document.querySelectorAll('#typeFilter .filter-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                activeType = chip.dataset.value;
+                applyFilters();
+            });
+
+            document.getElementById('statusFilter').addEventListener('click', e => {
+                const chip = e.target.closest('.filter-chip');
+                if (!chip) return;
+                document.querySelectorAll('#statusFilter .filter-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                activeStatus = chip.dataset.value;
+                applyFilters();
+            });
+        }
+
+        function applyFilters() {
+            filteredTransactions = allTransactions.filter(t => {
+                const matchType   = activeType === 'all' || t.type === activeType;
+                const matchStatus = activeStatus === 'all' || t.status === activeStatus;
+                const haystack    = [t.id, t.productName, t.method, t.type, t.status, t.jenis, t.merk, t.jenisJiwa]
+                    .filter(Boolean).join(' ').toLowerCase();
+                const matchSearch = !searchQuery || haystack.includes(searchQuery);
+                return matchType && matchStatus && matchSearch;
+            });
+            renderTransactions();
+        }
+
+        function loadTransactionHistory() {
+            let storedHistory = [];
+            try {
+                storedHistory = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
+            } catch (_) { storedHistory = []; }
+
+            const paymentHistory = Array.isArray(storedHistory)
+                ? storedHistory
+                : (storedHistory && typeof storedHistory === 'object' ? [storedHistory] : []);
+
+            if (!Array.isArray(storedHistory) && paymentHistory.length) {
+                localStorage.setItem('paymentHistory', JSON.stringify(paymentHistory));
+            }
+
+            const transactions = paymentHistory.map(payment => ({
+                id:          payment.id || generateTransactionId(),
+                productName: payment.productName || getProductName(payment.insuranceType || payment.type),
+                type:        payment.insuranceType || payment.type,
+                date:        payment.timestamp || payment.date || new Date().toISOString(),
+                amount:      Number(payment.amount) || 0,
+                method:      payment.method || 'Transfer',
+                status:      normalizeStatus(payment.status),
+                details:     payment.details || getTransactionDetails(payment.insuranceType || payment.type),
+                jenis:       payment.jenis || null,
+                jenisJiwa:   payment.jenisJiwa || null,
+                merk:        payment.merk || null
+            }));
+
+            allTransactions = transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+            filteredTransactions = [...allTransactions];
+            renderTransactions();
+        }
+
+        function renderTransactions() {
+            const content = document.getElementById('historyContent');
+
+            if (filteredTransactions.length === 0) {
+                content.innerHTML = `
+                    <div class="no-data">
+                        <h3>${allTransactions.length === 0 ? 'Belum Ada Transaksi' : 'Tidak Ada Hasil'}</h3>
+                        <p>${allTransactions.length === 0
+                            ? 'Anda belum memiliki histori pembelian asuransi'
+                            : 'Coba ubah kata kunci atau filter yang digunakan'}</p>
+                    </div>`;
+                return;
+            }
+
+            content.innerHTML = filteredTransactions.map(t => {
+                let jenis = '-';
+                if (t.type === 'jiwa')           jenis = t.jenisJiwa || '-';
+                else if (t.type === 'kesehatan') jenis = t.jenis || '-';
+                else if (t.type === 'mobil')     jenis = `${t.merk || ''} ${t.jenis || ''}`.trim() || '-';
+
+                return `
+                <div class="trx-card">
+                    <div class="trx-info">
+                        <div class="trx-info__name">${escapeHtml(t.productName)}</div>
+                        <div class="trx-info__meta">
+                            <span>${escapeHtml(t.id)}</span>
+                            <span>${escapeHtml(jenis)}</span>
+                            <span>${formatDate(t.date)}</span>
+                            <span>${escapeHtml(t.method)}</span>
+                        </div>
+                    </div>
+                    <div class="trx-right">
+                        <div class="trx-amount">Rp ${formatCurrency(t.amount)}</div>
+                        <span class="status-badge status-${t.status}">${t.status}</span>
+                    </div>
+                </div>`;
+            }).join('');
+
+        }
+
+        /* ---- helpers ---- */
+        function generateTransactionId() {
+            return 'TRX' + Date.now().toString().slice(-6) + Math.random().toString(36).slice(2,5).toUpperCase();
+        }
+
+        function normalizeStatus(s) {
+            const v = String(s || 'lunas').toLowerCase();
+            return ['lunas','pending','expired'].includes(v) ? v : 'pending';
+        }
+
+        function getProductName(type) {
+            return { kesehatan:'Asuransi Kesehatan', mobil:'Asuransi Mobil', jiwa:'Asuransi Jiwa' }[type] || 'Asuransi';
+        }
+
+        function getTransactionDetails(type) {
+            return { kesehatan:'Premi tahunan asuransi kesehatan', mobil:'Premi asuransi kendaraan', jiwa:'Premi asuransi jiwa' }[type] || 'Pembayaran premi asuransi';
+        }
+
+        function formatCurrency(n) {
+            return new Intl.NumberFormat('id-ID').format(n);
+        }
+
+        function formatDate(s) {
+            const d = new Date(s);
+            if (isNaN(d)) return '-';
+            return new Intl.DateTimeFormat('id-ID', { dateStyle:'medium', timeStyle:'short' }).format(d);
+        }
+
+        function escapeHtml(v) {
+            const el = document.createElement('div');
+            el.textContent = String(v ?? '');
+            return el.innerHTML;
+        }
+
+        function addTransaction(data) {
+            const h = JSON.parse(localStorage.getItem('paymentHistory') || '[]');
+            const arr = Array.isArray(h) ? h : [h].filter(Boolean);
+            arr.push(data);
+            localStorage.setItem('paymentHistory', JSON.stringify(arr));
+        }
+
+        window.addTransaction = addTransaction;
+    </script>
+</body>
+</html>
+

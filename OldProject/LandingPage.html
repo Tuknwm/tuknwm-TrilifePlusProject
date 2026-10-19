@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TriLifePlus</title>
+    <link rel="stylesheet" href="LandingPage2.css">
+    <link rel="icon" type="image/png" href="Img/Logo6.png"/>
+</head>
+<body>
+    <header class="header">
+        <a href="LandingPage.html">
+            <img class="Logo" src="Img/Logo2.png" alt="Logo">
+        </a>
+        <nav class="navbar">
+            <a href="#home" class="Nav">Beranda</a>
+            <a href="#produk" class="Nav">Produk</a>
+            <a href="#tentangkami" class="Nav">Tentang Kami</a>
+            <a href="#berita" class="Nav">Berita</a>
+            <a href="LoginPage.html" class="Nav login-link">Login</a>
+        </nav>
+    </header>
+
+    <div class="BgTrilife"></div>
+
+    <section class="ContainerHome" id="home" >
+        <div class="HomeBox">
+            <div class="JustDisableMr">
+                <h6>Hi <span>TrilifePlus!</span></h6>
+                <h5>Asuransi Mudah, Cepat dan Terjangkau<span></span></h5>
+                <p>TrilifePlus hadir memberikan langkah penting untuk melindungi Anda dan keluarga dari risiko tak terduga. Kami menawarkan berbagai jenis asuransi, termasuk asuransi mobil, kesehatan, dan jiwa, yang dirancang untuk memenuhi kebutuhan Anda. Dengan layanan pelanggan yang ramah dan proses klaim yang mudah, kami berkomitmen untuk memberikan perlindungan terbaik bagi Anda.</p>
+                <div>
+                    <p>Produk Kami:</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="AsuransiJiwa.html" class="Icon" onclick="if(!localStorage.getItem('currentUser')){event.preventDefault();window.location.href='LoginPage.html';}">
+                            <img src="Img/jiwa.png" alt="Asuransi Jiwa" style="width: 30px; height: 30px;"><br>
+                            <span>Asuransi Jiwa</span>
+                        </a>
+                        <a href="AsuransiKesehatan.html" class="IconV2" onclick="if(!localStorage.getItem('currentUser')){event.preventDefault();window.location.href='LoginPage.html';}">
+                            <img src="Img/kesehatan.png" alt="Asuransi Kesehatan" style="width: 30px; height: 30px;"><br>
+                            <span>Asuransi Kesehatan</span>
+                        </a>
+                        <a href="AsuransiMobil.html" class="Icon" onclick="if(!localStorage.getItem('currentUser')){event.preventDefault();window.location.href='LoginPage.html';}">
+                            <img src="Img/mobil.png" alt="Asuransi Mobil" style="width: 30px; height: 30px;"><br>
+                            <span>Asuransi Mobil</span>
+                        </a>
+                    </div>
+                </div>
+                <button class="LebihLanjut" onclick="document.getElementById('produk').scrollIntoView({ behavior: 'smooth' })">Lebih Lanjut</button>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <img src="Img/Fmly.png" alt="Profile" class="HomeImage">
+            </div>
+        </div>
+    </section>
+
+    <section class="ContainerProduk" id="produk" >
+        <div class="ProdukBox">
+            <div class="ProdukText" style="margin-bottom: 3rem;">
+                <h2>Produk Kami</h2>
+                <p style="font-size: x-large; margin: 0;">Pilihan Asuransi Terbaik Indonesia</p>
+            </div>
+            <div class="ProdukContent">
+                <div class="ProdukDis">
+                    <div class="Produkimg">
+                        <img src="Img/kesehatan.jpg" alt="Kesehatan">
+                    </div>
+                    <div class="TextProduk">
+                        <h2>Asuransi Kesehatan</h2>
+                        <p>Membantu menanggung biaya pengobatan, rawat inap, atau tindakan medis lainnya saat kamu sakit atau mengalami kecelakaan. Dengan proteksi kesehatan, kamu tidak perlu khawatir biaya rumah sakit yang mahal karena sebagian besar biaya ditanggung oleh polis. TrilifePlus menyediakan simulasi berbagai jenis polis kesehatan, mulai dari perawatan dasar hingga perlindungan tambahan, agar kamu bisa memilih sesuai kebutuhan dan prioritas kesehatan.</p>
+                    </div>
+                </div>
+                <div class="ProdukDis">
+                    <div class="Produkimg">
+                        <img src="Img/mobil.jpg" alt="Mobil">
+                    </div>
+                    <div class="TextProduk">
+                        <h2>Asuransi Mobil</h2>
+                        <p>Memberikan perlindungan terhadap risiko kerusakan, kecelakaan, atau kehilangan kendaraan. Dengan memiliki polis asuransi mobil, biaya perbaikan atau penggantian mobil akibat kejadian tak terduga dapat tertanggung, sehingga kamu bisa berkendara lebih tenang. TrilifePlus menawarkan simulasi pilihan polis mobil yang mudah dipahami, termasuk opsi perlindungan penuh (comprehensive) dan perlindungan dasar (total loss only), lengkap dengan panduan inspeksi online.</p>
+                    </div>
+                </div>
+                <div class="ProdukDis">
+                    <div class="Produkimg">
+                        <img src="Img/jiwa.AVIF" alt="Jiwa">
+                    </div>
+                    <div class="TextProduk">
+                        <h2>Asuransi Jiwa </h2>
+                        <p>Memberikan perlindungan finansial bagi keluarga atau ahli waris jika terjadi risiko meninggal dunia pada pemegang polis. Dengan memiliki asuransi jiwa, kamu dapat memastikan orang-orang tercinta tetap mendapatkan dukungan finansial, membayar hutang, atau menjaga kebutuhan sehari-hari tetap terpenuhi meski terjadi hal yang tidak diinginkan. TrilifePlus menghadirkan beberapa pilihan simulasi polis jiwa yang bisa disesuaikan dengan usia, kondisi kesehatan, dan anggaran kamu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ContainerMengapa" id="tentangkami" >
+        <div class="MengapaBox">
+            <div class="MengapaText">
+                <h2>Mengapa Memilih TrilifePlus?</h2>
+                <p>Ini lah keunggulan, yang membuat kami berbeda!</p>
+            </div>
+
+            <div class="MengapaKeunggulan">
+                <div class="BoxKeunggulan">
+                    <p style="font-size: 50px;">⚡</p>
+                    <div class="KeunggulanText">
+                        <h3>Proses Cepat</h3>
+                        <p>Dapatkan polis asuransi Anda dalam hitungan menit dengan proses online yang mudah.</p>
+                    </div>
+                </div>
+
+                <div class="BoxKeunggulan">
+                    <p style="font-size: 50px;">💰</p>
+                    <div class="KeunggulanText">
+                        <h3>Harga Terbaik</h3>
+                        <p>Bandingkan harga dari berbagai perusahaan asuransi dan dapatkan penawaran terbaik.</p>
+                    </div>
+                </div>
+
+                <div class="BoxKeunggulan">
+                    <p style="font-size: 50px;">🔒</p>
+                    <div class="KeunggulanText">
+                        <h3>Aman & Terpercaya</h3>
+                        <p>Platform yang aman dengan sertifikasi resmi dan dipercaya oleh lebih dari 10.000 pengguna.</p>
+                    </div>
+                </div>
+
+                <div class="BoxKeunggulan">
+                    <p style="font-size: 50px;">📞</p>
+                    <div class="KeunggulanText">
+                        <h3>Layanan 24/7</h3>
+                        <p>Tim customer service kami siap membantu Anda kapan saja, 24 jam sehari.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ContainerTentang" id="tentangkami"  style="margin-top: 3rem;">
+        <div class="TentangBox">
+            <div class="TentangText" style="margin-bottom: 3rem;">
+                <h2>Tentang TrilifePlus</h2>
+            </div>
+
+            <div class="TentangKami">
+                <div class="TentangKamiKiri">
+                    <div class="TentangKamiText">
+                        <h1>Apa itu TrilifePlus?</h1>
+                        <p>TrilifePlus adalah marketplace asuransi digital yang menyediakan pilihan asuransi jiwa, kesehatan, dan mobil. Platform ini hadir untuk membantu pengguna memahami berbagai opsi proteksi yang tersedia, sehingga bisa memilih polis yang sesuai kebutuhan secara mudah dan cepat.</p>
+                    </div>
+                    <div class="TentangKamiText">
+                        <h1>Apa bedanya marketplace asuransi TrilifePlus dengan perusahaan asuransi?</h1>
+                        <p>Sebagai marketplace, TrilifePlus berperan sebagai perantara antara calon nasabah dan perusahaan asuransi. Kami memberikan panduan dan rekomendasi secara objektif, sehingga pengguna dapat membandingkan berbagai polis dan menemukan proteksi yang paling tepat.</p>
+                    </div>
+                    <div class="TentangKamiText">
+                        <h1>Bagaimana TrilifePlus mendapatkan keuntungan?</h1>
+                        <p>TrilifePlus menerima komisi dari perusahaan asuransi untuk setiap polis yang berhasil dijual melalui platform. Komisi ini berupa persentase dari premi polis yang dibayar oleh pengguna, disesuaikan dengan kesepakatan antara TrilifePlus dan pihak perusahaan asuransi.</p>
+                    </div>
+                </div>
+
+                <div class="TentangKamiKanan">
+                    <div class="TentangKamiText">
+                        <h1>Apakah TrilifePlus sudah terdaftar di Otoritas Jasa Keuangan (OJK)?</h1>
+                        <p>TrilifePlus adalah platform dummy untuk tujuan simulasi dan edukasi. Semua informasi legalitas hanya contoh dan tidak mewakili status resmi produk asuransi nyata.</p>
+                    </div>
+
+                    <div class="TentangKamiText">
+                        <h1>Bagaimana cara membeli dan daftar asuransi online melalui TrilifePlus?</h1>
+                        <p class="lead">Langkah-langkah membeli asuransi online di TrilifePlus:</p>
+
+                        <ul class="TentangKamiText">
+                            <li>Kunjungi situs TrilifePlus dan pilih jenis asuransi: jiwa, kesehatan, atau mobil.</li>
+                            <li>Isi formulir data diri atau profil kendaraan (untuk asuransi mobil), lalu klik <strong>Tampilkan Pilihan Polis</strong>.</li>
+                            <li>Tim TrilifePlus akan menghubungi kamu untuk memberikan penawaran dan perbandingan polis simulasi.</li>
+                            <li>Pilih polis yang diinginkan.</li>
+                            <li>Quotation dan payment link dummy akan dikirimkan ke email kamu.</li>
+                            <li>Klik payment link untuk menyelesaikan pembayaran simulasi.</li>
+                            <li>Untuk asuransi mobil, simulasi inspeksi dilakukan secara online.</li>
+                            <li>Polis simulasi akan diproses dan dikirim ke email kamu.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ContainerTestimoni" id="tentangkami" >
+        <div class="Testbx">
+            <div class="TestimoniUteks">
+                <h2>Testimoni Pelanggan</h2>
+                <p>"Cerita nyata dari mereka yang sudah merasakan kemudahan bersama TrilifePlus. Karena pengalaman pelanggan adalah bukti terbaik kami."</p>
+            </div>
+            <div class="TestimoniContainer">
+                <div class="LoopSlide" id="loopSlide">
+                    <div class="TestimoniBox">
+                        <div class="TestimoniText">
+                            <h2>Andi Pratama</h2>
+                            <p>"Proses daftar asuransi di TrilifePlus gampang banget. Semua serba online, jadi nggak perlu ribet bolak-balik. Sangat membantu!"</p>
+                        </div>
+                    </div>
+
+                    <div class="TestimoniBox">
+                        <div class="TestimoniText">
+                            <h2>Citra Lestari</h2>
+                            <p>"Saya coba asuransi kesehatan di TrilifePlus, dan penjelasannya jelas banget. Cocok buat orang awam yang baru mau belajar asuransi."</p>
+                        </div>
+                    </div>
+
+                    <div class="TestimoniBox">
+                        <div class="TestimoniText">
+                            <h2>Rudi Hartono</h2>
+                            <p>"Layanan CS TrilifePlus responsif, sabar menjawab pertanyaan saya. Bener-bener bikin tenang sebelum pilih polis."</p>
+                        </div>
+                    </div>
+
+                    <div class="TestimoniBox">
+                        <div class="TestimoniText">
+                            <h2>Nabila Ananda</h2>
+                            <p>"Asuransi mobil di TrilifePlus praktis banget, bahkan inspeksinya bisa online. Keren sih, hemat waktu 🔥"</p>
+                        </div>
+                    </div>
+
+                    <div class="TestimoniBox">
+                        <div class="TestimoniText">
+                            <h2>Yusuf Ramadhan</h2>
+                            <p>"Puas banget dengan TrilifePlus. Bandingkan polis jadi lebih gampang, tinggal pilih yang sesuai kebutuhan."</p>
+                        </div>
+                    </div>
+
+                    <div class="TestimoniBox">
+                        <div class="TestimoniText">
+                            <h2>Melati Wulandari</h2>
+                            <p>"Saya pilih asuransi jiwa di TrilifePlus. Penjelasannya transparan dan jelas, jadi nggak bingung lagi."</p>
+                        </div>
+                    </div>
+
+                    <div class="TestimoniBox">
+                        <div class="TestimoniText">
+                            <h2>Budi Santoso</h2>
+                            <p>"Website TrilifePlus user friendly banget. Saya yang awam soal asuransi jadi bisa ngerti langkah-langkahnya dengan mudah."</p>
+                        </div>
+                    </div>
+
+                    <div class="TestimoniBox">
+                        <div class="TestimoniText">
+                            <h2>Clara Wijaya</h2>
+                            <p>"Konsultasi gratisnya membantu banget. CS menjelaskan detail dengan bahasa yang sederhana, jadi nggak ribet 👍"</p>
+                        </div>
+                    </div>
+
+                    <div class="TestimoniBox">
+                        <div class="TestimoniText">
+                            <h2>Hendra Saputra</h2>
+                            <p>"Proses pembayaran juga simpel, link langsung dikirim via email. Cepat dan praktis banget!"</p>
+                        </div>
+                    </div>
+
+                    <div class="TestimoniBox">
+                        <div class="TestimoniText">
+                            <h2>Siti Rahmawati</h2>
+                            <p>"Senang rasanya ada platform seperti TrilifePlus. Semua asuransi penting bisa ditemukan dalam satu tempat."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ContainerHome" id="berita" >
+        <div>
+            <div class="ContactBox">
+                <h2>Berita & Artikel</h2>
+                <p>Dapatkan informasi terbaru seputar asuransi, tips, dan edukasi finansial dari TrilifePlus.</p>
+            </div>
+            <div class="BeritaDis">
+                <div class="BeritaBox">
+                    <img src="Img/berita.png" alt="">
+                    <div class="BeritaContent">
+                        <h3>Tips Memilih Asuransi Kesehatan untuk Keluarga</h3>
+                        <p>Kesehatan keluarga adalah prioritas. TrilifePlus membagikan panduan singkat agar Anda dapat menentukan polis kesehatan yang tepat sesuai kebutuhan dan anggaran.</p>
+                        <button class="LebihLanjutBerita">Lebih Lanjut</button>
+                    </div>
+                </div>
+                <div class="BeritaBox">
+                    <img src="Img/berita.png" alt="Berita">
+                    <div class="BeritaContent">
+                        <h3>Kenali Pentingnya Asuransi Jiwa Sejak Dini</h3>
+                        <p>Banyak orang baru sadar pentingnya asuransi jiwa setelah terlambat. TrilifePlus mengajak masyarakat untuk memikirkan perlindungan finansial sejak usia produktif.</p>
+                        <button class="LebihLanjutBerita">Lebih Lanjut</button>
+                    </div>
+                </div>
+                <div class="BeritaBox">
+                    <img src="Img/berita.png" alt="Berita">
+                    <div class="BeritaContent">
+                        <h3>Liburan Aman dengan Asuransi Perjalanan</h3>
+                        <p>Tak perlu khawatir saat bepergian. Dengan asuransi perjalanan, Anda tetap terlindungi dari risiko tak terduga selama liburan.</p>
+                        <button class="LebihLanjutBerita">Lebih Lanjut</button>
+                    </div>
+                </div>
+                <div class="BeritaBox">
+                    <img src="Img/berita.png" alt="Berita">
+                    <div class="BeritaContent">
+                        <h3>Asuransi Online Dipastikan Aman di Bawah Pengawasan OJK</h3>
+                        <p>Masyarakat tak perlu ragu menggunakan platform asuransi digital. Semua layanan resmi, termasuk TrilifePlus, wajib berizin dan diawasi langsung oleh OJK.</p>
+                        <button class="LebihLanjutBerita">Lebih Lanjut</button>
+                    </div>
+                </div>
+                <div class="BeritaBox">
+                    <img src="Img/berita.png" alt="Berita">
+                    <div class="BeritaContent">
+                        <h3>Asuransi Mobil Online Lebih Baik dari Konvensional? Simak Faktanya!</h3>
+                        <p>Kini asuransi mobil bisa dibeli secara online, bahkan inspeksi dilakukan jarak jauh. Lalu, apakah lebih baik dibandingkan dengan cara konvensional?.</p>
+                        <button class="LebihLanjutBerita">Lebih Lanjut</button>
+                    </div>
+                </div>
+                <div class="BeritaBox">
+                    <img src="Img/berita.png" alt="Berita">
+                    <div class="BeritaContent">
+                        <h3>Asuransi Kesehatan kami hanya butuh BPJS sajah loh! </h3>
+                        <p>Dengan BPJS, Anda sudah punya proteksi dasar. Namun, untuk pelayanan lebih luas dan fleksibel, banyak orang juga memilih menambah asuransi swasta sebagai pelengkap.</p>
+                        <button class="LebihLanjutBerita">Lebih Lanjut</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ContainerMengapa" id="login" >
+        <div class="MengapaBox">
+            <div class="MengapaText">
+                <img src="Img/Logo2.png" alt="Logo" style="width: auto; height: 100px;">
+                <p style="font-size: x-large;">Siap Lindungi Diri dan Keluarga? Yuk Mulai Sekarang!</p>
+            </div>
+            <button class="DaftarAkun">Daftar Akun</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="containerFooter">
+            <div class="FooterBox">
+                <div class="FootB">
+                    <img class="FLogo" src="Img/Logo2.png" alt="Logo Asuransi">
+                    <p style="color: white; margin-bottom: 12px; max-width: 300px; line-height: 1.5; font-size: 16px;"><strong>PT Protego Arunika Trilife</strong></p>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 12px; max-width: 300px; line-height: 1.5; font-size: 14px;">Jl. Gatot Subroto Kav. 35-37, Menara Asuransi Lantai 12, RT.8/RW.3, Kuningan Barat, Kecamatan Mampang Prapatan, Kota Jakarta Selatan, DKI Jakarta 12710.</p>
+                    <p style="color: white; margin-bottom: 12px; max-width: 300px; line-height: 1.5; font-size: 16px;"><strong>Ikuti Kami:</strong></p>
+                    <div style="display: flex; gap: 12px; margin-top: 15px;">
+                        <a href="#" class="IconLink">
+                            <img src="Img/youtube.png" alt="YouTube" style="width: 20px; height: 20px;">
+                        </a>
+                        <a href="#" class="IconLink">
+                            <img src="Img/instagram.png" alt="Instagram" style="width: 20px; height: 20px;">
+                        </a>
+                        <a href="#" class="IconLink">
+                            <img src="Img/twitter2.png" alt="Twitter" style="width: 20px; height: 20px;">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="FootB" style="text-align:center;">
+                    <h4>Berizin dan Diawasi oleh</h4>
+                    <img src="Img/ojkv2.png" alt="OJK" class="legal-img" style="max-width:200px; margin-top:1rem;">
+                
+                </div>
+
+                <div class="InfoCs">
+                    <h4>Customer Service</h4>
+                    <div class="CustomerService">
+                        <div style="display: flex; gap: 40px; border-bottom: 2px solid rgba(255,255,255,0.2);">
+                            <div>
+                                <p>Email:</p>
+                                <p><strong>cs@insurex.id</strong></p>
+                            </div>
+                            <div>
+                                <p>Telepon:</p> 
+                                <p style="margin-bottom: 1rem;"><strong>(021) 1234567</strong></p>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem;"><strong>Waktu Operasional</strong></p>
+                        <div style="display: flex; gap: 20px;">
+                            <div style="border-left: 2px solid rgba(255,255,255,0.2); padding-left: 1rem;">
+                                <p>Senin - Jumat:</p>
+                                <p><strong> 07.00 - 18.00</strong></p>
+                            </div>
+                            <div style="border-left: 2px solid rgba(255,255,255,0.2); border-right: 2px solid rgba(255,255,255,0.2); padding-left: 1rem; padding-right: 1rem;">
+                                <p>Sabtu / Minggu & Hari Libur Nasional:</p> 
+                                <p><strong>Libur</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; margin-top: 1rem; gap: 10px;">
+                        <div class="BoxMs" style="width: 100%; display: flex; justify-content: center;">
+                            <img src="Img/file-contract-solid-full.png" 
+                                alt="Syarat & Ketentuan" 
+                                style="width:16px; height:16px; vertical-align:middle; margin-right:6px; object-fit:contain;">
+                            <div class="BoxText">
+                                <p style="color: white;"><strong>Syarat & Ketentuan</strong></p>
+                            </div>
+                        </div>
+                        <div class="BoxMs" style="width: 100%; display: flex; justify-content: center;">
+                            <img src="Img/user-shield-solid-full.png" alt="Syarat & Ketentuan" style="width:16px; height:16px; vertical-align:middle; margin-right:6px; object-fit:contain;">
+                            <div class="BoxText">
+                                <p style="color: white;"><strong>Kebijakan Privasi</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="End">
+                <p style="font-size: 14px;">&copy; 2025 TriLifePlus | All Rights Reserved.</p>
+            </div>
+        </div>
+
+        <div class="ChatWA">
+            <img src="Img/whatsapp.png" alt="WhatsApp" style="width: 36px; height: 36px;">
+        </div>
+    </footer>
+
+    <script>
+        class SmoothSlider {
+            constructor(containerId) {
+                this.container = document.getElementById(containerId);
+                this.offset = 0;
+                this.speed = 0.6;
+                this.boxWidth = 0;
+                this.isInitialized = false;
+                this.animationId = null;
+                
+                this.init();
+            }
+            
+            init() {
+                setTimeout(() => {
+                    this.calculateDimensions();
+                    this.cloneBoxes();
+                    this.startAnimation();
+                }, 100);
+            }
+            
+            calculateDimensions() {
+                const firstBox = this.container.children[0];
+                if (firstBox) {
+                    const style = window.getComputedStyle(firstBox);
+                    const width = firstBox.offsetWidth;
+                    const marginLeft = parseInt(style.marginLeft) || 0;
+                    const marginRight = parseInt(style.marginRight) || 0;
+                    
+                    this.boxWidth = width + marginLeft + marginRight;
+                    this.isInitialized = true;
+                }
+            }
+            
+            cloneBoxes() {
+                const originalBoxes = Array.from(this.container.children);
+                originalBoxes.forEach(box => {
+                    const clone = box.cloneNode(true);
+                    this.container.appendChild(clone);
+                });
+            }
+            
+            startAnimation() {
+                if (!this.isInitialized) return;
+                
+                this.animate();
+            }
+            
+            animate() {
+                this.offset -= this.speed;
+                
+                this.container.style.transform = `translate3d(${this.offset}px, 0, 0)`;
+                
+                if (Math.abs(this.offset) >= this.boxWidth) {
+                    this.offset += this.boxWidth;
+                    
+                    const firstBox = this.container.children[0];
+                    this.container.appendChild(firstBox);
+                    
+                    this.container.style.transform = `translate3d(${this.offset}px, 0, 0)`;
+                }
+                
+                this.animationId = requestAnimationFrame(() => this.animate());
+            }
+            
+            pause() {
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                }
+            }
+            
+            resume() {
+                this.animate();
+            }
+        }
+        
+        window.addEventListener('load', () => {
+            const slider = new SmoothSlider('loopSlide');
+        });
+
+        function updateDaftarAkunSection() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const section = document.getElementById('login');
+            if (section) section.style.display = currentUser ? 'none' : '';
+        }
+
+        document.addEventListener('DOMContentLoaded', updateDaftarAkunSection);
+        window.addEventListener('storage', e => {
+            if (e.key === 'currentUser') updateDaftarAkunSection();
+        });
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const tl = gsap.timeline({ delay: 0.2 });
+
+        // Set initial state
+        gsap.set('.header', { y: -80, opacity: 0 });
+        gsap.set('.JustDisableMr h6', { y: 60, opacity: 0 });
+        gsap.set('.JustDisableMr h5', { y: 60, opacity: 0 });
+        gsap.set('.JustDisableMr p', { y: 40, opacity: 0 });
+        gsap.set('.JustDisableMr > div', { y: 40, opacity: 0 });
+        gsap.set('.LebihLanjut', { y: 30, opacity: 0 });
+        gsap.set('.HomeImage', { x: 80, opacity: 0 });
+
+        // Animate in sequence
+        tl.to('.header', { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' })
+          .to('.JustDisableMr h6', { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }, '-=0.3')
+          .to('.JustDisableMr h5', { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, '-=0.5')
+          .to('.JustDisableMr p',  { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+          .to('.JustDisableMr > div', { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+          .to('.LebihLanjut', { y: 0, opacity: 1, duration: 0.5, ease: 'back.out(1.4)' }, '-=0.3')
+          .to('.HomeImage', { x: 0, opacity: 1, duration: 0.9, ease: 'power4.out' }, 0.3);
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #F9FAFC;
+  --color-secondary: #475974;
+  --color-secondary-dark: #2F3C4F;
+  --color-secondary-light: #627797;
+  --color-secondary-subtle: #8A9CB3;
+  --font-sans: var(--font-plus-jakarta), sans-serif;
+}
+
+:root {
+  --background: #F9FAFC;
+  --foreground: #475974;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+.dashboard-bg {
+  position: relative;
+  isolation: isolate;
+}
+
+.dashboard-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("/images/Logo4.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 420px;
+  opacity: 0.01;
+}
+
+.dashboard-bg > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.page-transition {
+  min-height: 100vh;
+  animation: pageEnter 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+::view-transition-old(root) {
+  animation: routeFadeOut 180ms ease both;
+}
+
+::view-transition-new(root) {
+  animation: routeFadeIn 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes routeFadeOut {
+  to { opacity: 0; transform: translateY(-6px); }
+}
+
+@keyframes routeFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition { animation: none; }
+}
+
+/* Modal Smooth Spring Keyframes */
+@keyframes modalPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modal-pop {
+  animation: modalPop 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Subtle fade in keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F9FAFC;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
