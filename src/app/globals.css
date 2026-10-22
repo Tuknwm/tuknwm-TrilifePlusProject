@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@fontsource/plus-jakarta-sans/latin.css";
 
 main > section > div.mt-12.max-w-none {
   border-top: 1px solid #e2e8f0;
@@ -25,7 +26,7 @@ p[role="alert"] {
   --color-secondary-dark: #2F3C4F;
   --color-secondary-light: #627797;
   --color-secondary-subtle: #8A9CB3;
-  --font-sans: var(--font-plus-jakarta), sans-serif;
+  --font-sans: "Plus Jakarta Sans", Arial, Helvetica, sans-serif;
 }
 
 :root {

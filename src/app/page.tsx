@@ -53,6 +53,11 @@ export default function HomePage() {
   const { lenis } = useSmoothScroll();
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    lenis?.scrollTo(0, { immediate: true });
+  }, [lenis]);
+
+  useEffect(() => {
     const stored = localStorage.getItem("currentUser");
     if (stored) {
       try {

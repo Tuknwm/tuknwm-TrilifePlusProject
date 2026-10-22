@@ -45,7 +45,7 @@ export function LoadingPage() {
     window.addEventListener("touchmove", preventScroll, { passive: false });
     window.addEventListener("keydown", preventKeys);
     const latin = svg.querySelector("#kurokyu-stroke"); const curve = overlay.querySelector("#curvePath"); const emoji = overlay.querySelector("#emoji-exit");
-    const length = (latin as SVGTextElement | null)?.getComputedTextLength?.() * 2 || 1200;
+    const length = ((latin as SVGTextElement | null)?.getComputedTextLength?.() ?? 600) * 2;
     const tl = gsap.timeline({ onComplete: () => {
       window.setTimeout(() => {
         sessionStorage.setItem("hasVisited", "1");
