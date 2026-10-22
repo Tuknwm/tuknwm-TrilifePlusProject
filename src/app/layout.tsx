@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
+import { AppShell } from "@/components/AppShell";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -11,10 +12,10 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "TriLifePlus - Simple, Fast & Affordable Insurance",
+  title: "TrilifePlus",
   description: "Your trusted digital insurance marketplace for Life, Health, and Auto protection.",
   icons: {
-    icon: "/images/Logo6.png",
+    icon: "/Logo6.png",
   },
 };
 
@@ -27,7 +28,7 @@ export default function RootLayout({
     <html lang="en" className={`${plusJakartaSans.variable}`}>
       <body className="page-transition min-h-screen bg-primary text-secondary font-sans antialiased selection:bg-secondary selection:text-white">
         <SmoothScrollProvider>
-          {children}
+          <AppShell>{children}</AppShell>
         </SmoothScrollProvider>
       </body>
     </html>

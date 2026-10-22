@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+main > section > div.mt-12.max-w-none {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1.5rem;
+}
+
+button:not(:disabled) {
+  cursor: pointer !important;
+}
+
+button:disabled {
+  cursor: not-allowed !important;
+}
+
+p[role="alert"] {
+  flex: 1;
+  margin-left: auto;
+  text-align: right;
+}
+
 @theme {
   --color-primary: #F9FAFC;
   --color-secondary: #475974;
@@ -41,6 +60,58 @@ body {
   overflow-x: hidden;
 }
 
+.navbar-loading { opacity: 0; transform: translateY(-16px); }
+.navbar-loaded { animation: navbar-enter 200ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+@keyframes navbar-enter {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+html,
+body {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.loading-page {
+  position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center;
+  overflow: hidden; background: #000; color: #fff; clip-path: url("#curveClip");
+  font-family: Montserrat, sans-serif;
+}
+.loading-clip-defs { position: absolute; width: 0; height: 0; }
+.loader-container { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; }
+.loading-svg { width: 100%; max-width: 900px; overflow: visible; }
+.text-path { fill: transparent; stroke: #333; stroke-width: 1.5; stroke-linecap: round; }
+.char-fill { fill: #fff; opacity: 0; filter: drop-shadow(0 0 8px rgba(255,255,255,.8)); }
+.font-stroke-row { fill: transparent; stroke: rgba(255,255,255,.22); stroke-width: 1; font-size: 168px; font-family: "DM Sans", sans-serif; font-weight: 800; letter-spacing: 10px; }
+.loading-clock,
+.loading-footer,
+.loading-emoji {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.7rem; letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.loading-clock { top: 1.5rem; left: 1.5rem; }
+.loading-clock strong { display: block; font-size: 1.5rem; font-weight: 900; letter-spacing: normal; }
+.loading-footer { bottom: 1.5rem; left: 1.5rem; }
+.loading-emoji { right: 1.5rem; bottom: 1.5rem; font-size: 1.5rem; font-weight: 900; opacity: 0; transform: translateY(20px); }
+.legacy-notice-backdrop { position: fixed; inset: 0; z-index: 9998; display: grid; place-items: center; padding: 1.5rem; background: rgba(71, 89, 116, 0.025); backdrop-filter: blur(5px); animation: notice-in 200ms ease-out both; }
+.legacy-notice-backdrop.is-closing { animation: notice-out 200ms ease-in both; }
+.legacy-notice { width: min(100%, 32rem); border: 1px solid #e2e8f0; border-radius: 8px; background: #f9fafc !important; opacity: 1 !important; backdrop-filter: none !important; padding: 2rem; color: #475974; text-align: center; box-shadow: 0 18px 45px rgba(71, 89, 116, 0.2); }
+.legacy-notice h2 { margin-top: 1rem; font-size: 1.1rem; font-weight: 800; }
+.legacy-notice-icon { display: flex; justify-content: center; align-items: center; width: 100%; height: 3rem; margin: 0 auto; color: #475974; }
+.legacy-notice p { margin: 1.5rem auto 0; max-width: 28rem; color: #64748b; font-size: .875rem; line-height: 1.6; }
+.legacy-notice button { margin-top: 1.25rem; width: 100%; border-radius: 8px; background: #475974; padding: .7rem 1rem; color: white; font-size: .875rem; font-weight: 700; cursor: pointer; transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease; }
+.legacy-notice button:hover { background: #2F3C4F; box-shadow: 0 8px 18px rgba(47, 60, 79, 0.2); transform: translateY(-2px); }
+@keyframes notice-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes notice-out { from { opacity: 1; } to { opacity: 0; } }
+
 .dashboard-bg {
   position: relative;
   isolation: isolate;
@@ -52,7 +123,7 @@ body {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background-image: url("/images/Logo4.png");
+  background-image: url("/Logo4.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 420px;
@@ -74,6 +145,60 @@ body {
   animation: pageEnter 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+.homepage section {
+  opacity: 0;
+}
+
+.homepage section > div {
+  opacity: 0;
+}
+
+.homepage section.is-visible {
+  animation: homepage-section-in 200ms ease-out both;
+}
+
+.homepage section.is-visible > div {
+  animation: homepage-content-in 200ms ease-out both;
+}
+
+.homepage-stat {
+  opacity: 0;
+}
+
+.homepage section.is-visible .homepage-stat {
+  animation: homepage-stat-in 550ms ease-out both;
+}
+
+.homepage section.is-visible .homepage-stat:nth-child(2) { animation-delay: 120ms; }
+.homepage section.is-visible .homepage-stat:nth-child(3) { animation-delay: 240ms; }
+
+.homepage article,
+.homepage section button,
+.homepage section a {
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, background-color 220ms ease;
+}
+
+.homepage article:hover,
+.homepage section button:hover,
+.homepage section a:hover {
+  transform: translateY(-3px);
+}
+
+@keyframes homepage-section-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes homepage-content-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes homepage-stat-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 ::view-transition-old(root) {
   animation: routeFadeOut 180ms ease both;
 }
@@ -93,9 +218,12 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .page-transition { animation: none; }
+  .homepage section,
+  .homepage section > div,
+  .homepage-stat { animation: none; opacity: 1; }
 }
 
-/* Modal Smooth Spring Keyframes */
+
 @keyframes modalPop {
   0% {
     opacity: 0;
@@ -111,7 +239,7 @@ body {
   animation: modalPop 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Subtle fade in keyframes */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -127,7 +255,7 @@ body {
   animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Custom smooth scrollbar */
+
 ::-webkit-scrollbar {
   width: 8px;
 }

@@ -22,13 +22,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [mode, setMode] = useState<"login" | "register">(initialMode);
   const [rendered, setRendered] = useState(false);
   const [active, setActive] = useState(false);
-
-  // Smooth open & close animation timing
   useEffect(() => {
     if (isOpen) {
       setRendered(true);
       setMode(initialMode);
-      // Trigger enter transition in next paint
       const timer = setTimeout(() => {
         setActive(true);
       }, 20);
@@ -69,7 +66,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop with smooth fade transition */}
+      
       <div
         className={`fixed inset-0 bg-slate-900/40 backdrop-blur-xs transition-opacity duration-300 ease-out ${
           active ? "opacity-100" : "opacity-0"
@@ -77,7 +74,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         onClick={handleClose}
       />
 
-      {/* Popout box with smooth scale, translate, and opacity transition */}
+      
       <div
         className={`relative w-full max-w-md bg-[#F9FAFC] border border-slate-200/90 rounded-[8px] shadow-2xl p-6 sm:p-8 z-10 text-[#475974] transform transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           active
@@ -85,7 +82,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             : "opacity-0 scale-95 translate-y-4 pointer-events-none"
         }`}
       >
-        {/* Close Button */}
+        
         <button
           onClick={handleClose}
           className="absolute top-4 right-4 p-1.5 rounded-[8px] text-slate-400 hover:text-[#475974] hover:bg-slate-200/60 transition-colors cursor-pointer"
@@ -94,17 +91,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           <X className="w-5 h-5" />
         </button>
 
-        {/* Header with Logo.png */}
+        
         <div className="flex flex-col items-center text-center space-y-2.5 mb-6">
-          <div className="relative w-12 h-12 flex items-center justify-center">
-            <Image
-              src="/images/Logo.png"
-              alt="TriLifePlus Logo"
-              width={44}
-              height={44}
-              className="object-contain"
-            />
-          </div>
+          {mode === "register" && <div className="relative h-16 w-40 flex items-center justify-center">
+            <Image src="/Logo4.png" alt="TriLifePlus Logo" width={160} height={64} className="object-contain" />
+          </div>}
           <div>
             <h3 className="text-xl font-bold tracking-tight text-[#475974] transition-all">
               {mode === "login" ? "Sign In to TriLifePlus" : "Create Your Free Account"}
@@ -117,10 +108,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </div>
         </div>
 
-        {/* Form container with smooth fade transition when switching between login and register */}
+        
         <div className="transition-all duration-200 ease-in-out">
           {mode === "login" ? (
-            /* ================= SIGN IN FORM ================= */
+            
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-[#475974] mb-1.5">
@@ -172,14 +163,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
               <button
                 type="submit"
-                className="w-full mt-2 inline-flex items-center justify-center gap-2 py-3 rounded-[8px] bg-[#475974] text-white text-xs font-semibold hover:bg-[#2F3C4F] shadow-xs hover:shadow-md transition-all cursor-pointer active:scale-[0.99]"
+                className="w-full mt-2 inline-flex items-center justify-center gap-2 py-3.5 rounded-[8px] bg-[#475974] text-white text-sm font-semibold hover:bg-[#2F3C4F] shadow-xs hover:shadow-md transition-all cursor-pointer active:scale-[0.99]"
               >
                 Sign In Instantly
                 <ArrowRight className="w-4 h-4" />
               </button>
             </form>
           ) : (
-            /* ================= REGISTER FORM ================= */
+            
             <form onSubmit={handleSubmit} className="space-y-3.5">
               <div>
                 <label className="block text-xs font-semibold text-[#475974] mb-1.5">
@@ -248,7 +239,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
               <button
                 type="submit"
-                className="w-full mt-2 inline-flex items-center justify-center gap-2 py-3 rounded-[8px] bg-[#475974] text-white text-xs font-semibold hover:bg-[#2F3C4F] shadow-xs hover:shadow-md transition-all cursor-pointer active:scale-[0.99]"
+                className="w-full mt-2 inline-flex items-center justify-center gap-2 py-3.5 rounded-[8px] bg-[#475974] text-white text-sm font-semibold hover:bg-[#2F3C4F] shadow-xs hover:shadow-md transition-all cursor-pointer active:scale-[0.99]"
               >
                 Complete Registration
                 <ArrowRight className="w-4 h-4" />
@@ -257,7 +248,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           )}
         </div>
 
-        {/* Switch Mode Footer */}
+        
         <div className="mt-5 pt-4 border-t border-slate-200/60 text-center text-xs text-slate-500">
           {mode === "login" ? (
             <p>

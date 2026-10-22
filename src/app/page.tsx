@@ -16,6 +16,21 @@ import {
   Quote,
   ChevronRight
 } from "lucide-react";
+
+function CountUp({ end, suffix = "", decimals = 0, active = false }: { end: number; suffix?: string; decimals?: number; active?: boolean }) {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    const start = performance.now();
+    const frame = (now: number) => {
+      const progress = Math.min((now - start) / 1200, 1);
+      setValue(end * (1 - Math.pow(1 - progress, 3)));
+      if (progress < 1) requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  }, [active, end]);
+  return `${decimals ? value.toFixed(decimals) : Math.round(value).toLocaleString()}${suffix}`;
+}
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { AuthModal } from "@/components/AuthModal";
@@ -25,10 +40,19 @@ export default function HomePage() {
   const [currentUser, setCurrentUser] = useState<{ nama: string; email?: string } | null>(null);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "register">("login");
+  const [statsActive, setStatsActive] = useState(false);
+
+  useEffect(() => {
+    const sections = document.querySelectorAll(".homepage section");
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); if ((entry.target as HTMLElement).id === "home") setStatsActive(true); } }), { threshold: 0.16 });
+    const startAnimations = () => sections.forEach((section) => observer.observe(section));
+    if (sessionStorage.getItem("hasVisited")) startAnimations();
+    else window.addEventListener("loading-complete", startAnimations, { once: true });
+    return () => { observer.disconnect(); window.removeEventListener("loading-complete", startAnimations); };
+  }, []);
   const { lenis } = useSmoothScroll();
 
   useEffect(() => {
-    // Check localStorage for logged in user
     const stored = localStorage.getItem("currentUser");
     if (stored) {
       try {
@@ -76,7 +100,7 @@ export default function HomePage() {
         "Cashless across Leading Hospital Networks",
         "Fast 24-Hour Claim Processing",
       ],
-      image: "/images/kesehatan.jpg",
+      image: "/kesehatan.jpg",
       icon: <HeartHandshake className="w-5 h-5 text-emerald-600" />,
       link: "/products/health",
     },
@@ -90,7 +114,7 @@ export default function HomePage() {
         "Flexible Premiums by Age",
         "Transparent & Swift Payouts",
       ],
-      image: "/images/jiwa.avif",
+      image: "/jiwa.avif",
       icon: <ShieldCheck className="w-5 h-5 text-sky-600" />,
       link: "/products/life",
     },
@@ -104,7 +128,7 @@ export default function HomePage() {
         "Quick Online Photo Inspection",
         "24/7 Roadside Assistance & Towing",
       ],
-      image: "/images/mobil.jpg",
+      image: "/mobil.jpg",
       icon: <Car className="w-5 h-5 text-amber-600" />,
       link: "/products/auto",
     },
@@ -172,8 +196,8 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="page-transition flex flex-col min-h-screen bg-[#F9FAFC] text-[#475974] selection:bg-slate-200">
-      {/* 1. Capsule Navbar */}
+    <div className="page-transition homepage flex flex-col min-h-screen bg-[#F9FAFC] text-[#475974] selection:bg-slate-200">
+      
       <Navbar
         currentUser={currentUser}
         onLogout={handleLogout}
@@ -181,17 +205,15 @@ export default function HomePage() {
       />
 
       <main className="flex-1">
-        {/* 2. Hero Banner */}
-        <section id="home" className="relative pt-8 pb-24 md:pt-16 md:pb-32 overflow-hidden">
-          {/* Subtle Ambient Background Gradients */}
+        
+        <section id="home" className="relative py-16 md:py-24 overflow-hidden">
+          
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full -z-10 pointer-events-none">
-            <div className="absolute top-10 left-1/4 w-96 h-96 bg-sky-100/40 rounded-full blur-3xl"></div>
-            <div className="absolute top-36 right-10 w-96 h-96 bg-slate-200/30 rounded-full blur-3xl"></div>
           </div>
 
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
-              {/* Text Left Column */}
+              
               <div className="lg:col-span-7 space-y-7 text-left">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#475974] tracking-tight leading-[1.12]">
                   Insurance Made Simple, Fast & <span className="text-sky-600">Affordable</span> For Everyone.
@@ -201,7 +223,7 @@ export default function HomePage() {
                   TriLifePlus delivers true peace of mind for you and your family against life&apos;s unexpected moments. Easily compare and tailor Life, Health, and Car insurance policies in one trusted digital platform.
                 </p>
 
-                {/* Quick Product Pills with Icons and Smooth Scroll */}
+                
                 <div className="pt-1">
                   <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
                     Explore Protection Options:
@@ -234,7 +256,7 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* CTA Buttons */}
+                
                 <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                   <button
                     type="button"
@@ -253,47 +275,51 @@ export default function HomePage() {
                   </a>
                 </div>
 
-                {/* Micro Stats */}
+                
                 <div className="pt-6 border-t border-slate-200/60 grid grid-cols-3 gap-6 max-w-lg">
-                  <div>
-                    <p className="text-2xl font-extrabold text-[#475974]">10,000+</p>
+                  <div className="homepage-stat">
+                    <p className="text-2xl font-extrabold text-[#475974]"><CountUp end={10000} suffix="+" active={statsActive} /></p>
                     <p className="text-xs text-slate-500">Protected Members</p>
                   </div>
-                  <div>
-                    <p className="text-2xl font-extrabold text-[#475974]">99.8%</p>
+                  <div className="homepage-stat">
+                    <p className="text-2xl font-extrabold text-[#475974]"><CountUp end={99.8} decimals={1} suffix="%" active={statsActive} /></p>
                     <p className="text-xs text-slate-500">Satisfaction Rate</p>
                   </div>
-                  <div>
-                    <p className="text-2xl font-extrabold text-[#475974]">24/7</p>
+                  <div className="homepage-stat">
+                    <p className="text-2xl font-extrabold text-[#475974]"><CountUp end={24} suffix="/7" active={statsActive} /></p>
                     <p className="text-xs text-slate-500">Instant Assistance</p>
                   </div>
                 </div>
               </div>
 
-              {/* Image Hero Right Column */}
+              
               <div className="lg:col-span-5 relative flex justify-center items-center">
                 <div className="relative w-full max-w-md lg:max-w-none">
                   <div className="relative h-[380px] sm:h-[440px] w-full">
-                    <Image
-                      src="/images/Fmly.png"
-                      alt="TriLifePlus Happy Family"
-                      fill
-                      className="object-contain"
-                      priority
-                    />
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      poster="/Fmly.png"
+                      className="h-full w-full object-contain"
+                      aria-label="TriLifePlus Happy Family"
+                    >
+                      <source src="/Fmly.webm" type="video/webm" />
+                    </video>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Section Blur Fade Transition to Next Section */}
+          
           <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent via-[#F9FAFC]/60 to-[#F9FAFC] pointer-events-none backdrop-blur-[2px]"></div>
         </section>
 
-        {/* 3. About the Brand */}
+        
         <section id="about" className="relative py-24 bg-white">
-          {/* Top Blur Fade */}
+          
           <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#F9FAFC] via-[#F9FAFC]/40 to-transparent pointer-events-none backdrop-blur-[2px]"></div>
 
           <div className="max-w-7xl mx-auto px-6">
@@ -306,7 +332,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* 4 Feature Columns */}
+            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {brandValues.map((val, idx) => (
                 <div
@@ -322,7 +348,7 @@ export default function HomePage() {
               ))}
             </div>
 
-            {/* Brand Story & Insight Highlight */}
+            
             <div className="mt-16 bg-[#F9FAFC] border border-slate-200 rounded-[8px] p-8 sm:p-12">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 <div className="space-y-4">
@@ -347,7 +373,7 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* Sub-cards using single secondary color #475974 */}
+                
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-white p-5 rounded-[8px] border border-slate-200 shadow-2xs">
                     <p className="text-xs font-bold text-[#475974] uppercase tracking-wider mb-1">Instant Quotes</p>
@@ -368,13 +394,13 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Bottom Blur Fade Transition */}
+          
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent via-white/50 to-white pointer-events-none backdrop-blur-[2px]"></div>
         </section>
 
-        {/* 4. Products for Sale */}
+        
         <section id="products" className="relative py-24 bg-[#F9FAFC]">
-          {/* Top Blur Fade */}
+          
           <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-white via-white/40 to-transparent pointer-events-none backdrop-blur-[2px]"></div>
 
           <div className="max-w-7xl mx-auto px-6">
@@ -389,14 +415,14 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Product Cards Grid */}
+            
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {products.map((prod) => (
                 <div
                   key={prod.id}
                   className="bg-white rounded-[8px] border border-slate-200/80 overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col group"
                 >
-                  {/* Clean image banner */}
+                  
                   <div className="relative h-52 w-full bg-slate-100 overflow-hidden">
                     <Image
                       src={prod.image}
@@ -410,14 +436,14 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* Card Content */}
+                  
                   <div className="p-7 flex-1 flex flex-col justify-between space-y-6">
                     <div className="space-y-3">
                       <h3 className="text-xl font-bold text-[#475974] pt-1">{prod.title}</h3>
                       <p className="text-xs text-slate-500 leading-relaxed">{prod.description}</p>
                     </div>
 
-                    {/* Features list */}
+                    
                     <div className="space-y-2.5 pt-4 border-t border-slate-100">
                       <p className="text-[11px] font-semibold uppercase text-slate-400 tracking-wider">
                         Key Coverage Benefits:
@@ -430,7 +456,7 @@ export default function HomePage() {
                       ))}
                     </div>
 
-                    {/* Button Action */}
+                    
                     <div className="pt-2">
                       <button
                         type="button"
@@ -453,13 +479,13 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Bottom Blur Fade */}
+          
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent via-[#F9FAFC]/50 to-[#F9FAFC] pointer-events-none backdrop-blur-[2px]"></div>
         </section>
 
-        {/* 5. Customer Testimonials */}
+        
         <section id="testimonials" className="relative py-24 bg-white overflow-hidden">
-          {/* Top Blur Fade */}
+          
           <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#F9FAFC] via-[#F9FAFC]/40 to-transparent pointer-events-none backdrop-blur-[2px]"></div>
 
           <div className="max-w-7xl mx-auto px-6">
@@ -472,7 +498,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Testimonials Grid */}
+            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {testimonials.map((testi, idx) => (
                 <div
@@ -502,13 +528,13 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Bottom Blur Fade */}
+          
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent via-white/50 to-white pointer-events-none backdrop-blur-[2px]"></div>
         </section>
 
-        {/* 6. Call To Action (CTA) To Register Account */}
+        
         <section className="relative py-28 bg-[#F9FAFC]">
-          {/* Top Blur Fade */}
+          
           <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-white via-white/40 to-transparent pointer-events-none backdrop-blur-[2px]"></div>
 
           <div className="max-w-4xl mx-auto px-6">
@@ -546,12 +572,29 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        
+        <div className="relative z-20 -mb-8 h-16 bg-gradient-to-b from-[#F9FAFC] via-white/80 to-transparent backdrop-blur-[24px]"></div>
+        <section className="relative py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="mb-12 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Latest updates</p>
+                <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-[#475974]">News &amp; Insights</h2>
+              </div>
+              <p className="max-w-md text-sm leading-relaxed text-slate-500">Tips and updates to help you make smarter protection decisions.</p>
+            </div>
+            <div className="grid gap-6 md:grid-cols-3">
+              {[{ date: "12 June 2025", title: "Understanding the right life insurance coverage", text: "A simple guide to choosing protection that fits your family goals.", image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=80" }, { date: "28 May 2025", title: "Why health protection matters early", text: "Small decisions today can make future healthcare planning easier.", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80" }, { date: "10 May 2025", title: "Prepare your car for a safer journey", text: "Practical reminders for protecting your vehicle and everyone inside it.", image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80" }].map((news) => <article key={news.title} className="overflow-hidden rounded-[8px] border border-slate-200/80 bg-[#F9FAFC] transition-all hover:border-slate-300 hover:shadow-xs"><div className="relative h-40 w-full bg-slate-100"><img src={news.image} alt={news.title} className="h-full w-full object-cover" /></div><div className="p-6"><p className="text-xs font-semibold text-slate-400">{news.date}</p><h3 className="mt-3 text-lg font-bold leading-snug text-[#475974]">{news.title}</h3><p className="mt-3 text-sm leading-relaxed text-slate-500">{news.text}</p><button type="button" className="mt-5 text-xs font-bold text-[#475974] transition-colors hover:text-sky-600">Read more →</button></div></article>)}
+            </div>
+          </div>
+        </section>
       </main>
 
-      {/* Footer */}
+      
       <Footer />
 
-      {/* Auth Popout Modal */}
+      
       <AuthModal
         isOpen={authModalOpen}
         initialMode={authMode}
