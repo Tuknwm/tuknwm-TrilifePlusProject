@@ -20,10 +20,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentUser, onLogout, onOpenAut
   const dashboardNav = isDashboard || pathname.startsWith("/dashboard");
 
   useEffect(() => {
-    if (sessionStorage.getItem("hasVisited")) setLoaded(true);
-    const reveal = () => setLoaded(true);
-    window.addEventListener("loading-complete", reveal, { once: true });
-    return () => window.removeEventListener("loading-complete", reveal);
+    setLoaded(true);
   }, []);
 
   const navLinks = dashboardNav ? [] : [

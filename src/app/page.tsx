@@ -46,9 +46,8 @@ export default function HomePage() {
     const sections = document.querySelectorAll(".homepage section");
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); if ((entry.target as HTMLElement).id === "home") setStatsActive(true); } }), { threshold: 0.16 });
     const startAnimations = () => sections.forEach((section) => observer.observe(section));
-    if (sessionStorage.getItem("hasVisited")) startAnimations();
-    else window.addEventListener("loading-complete", startAnimations, { once: true });
-    return () => { observer.disconnect(); window.removeEventListener("loading-complete", startAnimations); };
+    startAnimations();
+    return () => { observer.disconnect(); };
   }, []);
   const { lenis } = useSmoothScroll();
 
